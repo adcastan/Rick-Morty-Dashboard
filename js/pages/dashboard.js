@@ -37,12 +37,12 @@ export const dashboard = {
                 this.loadCharacters();
 
             }, 500);
-        })
+        });
         this.elements.filter.addEventListener('change', (e) => {
             store.state.filters.status = e.target.value;
             store.state.currentPage = 1;
             this.loadCharacters();
-        })
+        });
 
         this.elements.prevBtn.addEventListener('click', () => {
             if (store.state.currentPage > 1) {
@@ -51,7 +51,7 @@ export const dashboard = {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
             }
 
-        })
+        });
 
         this.elements.nextBtn.addEventListener('click', () => {
             if (store.state.currentPage < store.state.totalPages) {
@@ -60,7 +60,7 @@ export const dashboard = {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
             }
 
-        })
+        });
     },
 
     async loadCharacters() {
@@ -111,7 +111,7 @@ export const dashboard = {
                 const added = store.toggleFavorite(char);
 
                 btn.classList.toggle('active', added);
-                btn.querySelector('span').textContent = added ? 'En Favoritos' : 'Añadir a Favoritos'
+                btn.querySelector('span').textContent = added ? 'En Favoritos' : 'Añadir a Favoritos';
 
             })
 
@@ -129,10 +129,7 @@ export const dashboard = {
             </div>`;
             return;
         }
-        favoritesList.innerHTML = `
-        
-        
-        `;
+        favoritesList.innerHTML = ``;
         store.state.favorites.forEach(fav => {
             const item = document.createElement('div');
             item.className = 'fav-item';

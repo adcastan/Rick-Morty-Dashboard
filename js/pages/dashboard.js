@@ -13,7 +13,7 @@ export const dashboard = {
         loader: document.getElementById('loader'),
         noResults: document.getElementById('noResults'),
         prevBtn: document.getElementById('prevPage'),
-        nextBtn: document.getElementById('nextBtn'),
+        nextBtn: document.getElementById('nextPage'),
         pageInfo: document.getElementById('pageInfo')
     },
     async init() {
@@ -66,7 +66,7 @@ export const dashboard = {
     async loadCharacters() {
         this.showLoader(true);
         this.elements.noResults.classList.add('hidden');
-        const data = await getCharacters(store.state.currentPage, store.stage.filters);
+        const data = await getCharacters(store.state.currentPage,store.stage.filters);
         if (data.error || !data.results) {
             store.state.characters = [];
             store.state.totalPages = 0;

@@ -1,6 +1,9 @@
 import { store } from '../state/store.js'
 import { getCharacters } from '../core/api.js'
 
+const BASE_URL = 'https://rickandmortyapi.com/api';
+
+
 export const dashboard = {
     elements: {
         grid: document.getElementById('charactersGrid'),
@@ -16,6 +19,8 @@ export const dashboard = {
     async init() {
         this.setupEventListeners();
         await this.loadCharacters();
+        this.renderFavorites();
+        lucide.createIcons();
     },
 
 
@@ -31,7 +36,7 @@ export const dashboard = {
                 //cargar perspnajes de Ricardo y Morticio filtrados
                 this.loadCharacters();
 
-            }, 500)
+            }, 500);
         })
         this.elements.filter.addEventListener('change', (e) => {
             store.state.filters.status = e.target.value;
@@ -85,7 +90,7 @@ export const dashboard = {
             card.className = 'character-card';
             card.innerHTML = `
             <div class="card-image-wrapper">
-             <img src="" alt="" loading="lazy">
+             <img src="${char.image}" alt="${char.name}" loading="lazy">
             </div>
                 <div class="card-content">
                     <h3 class="character-name">${char.name}</h3>
@@ -140,7 +145,7 @@ export const dashboard = {
                     <i data-lucide="x"></i>
                 </button>            
             `;
-            item.querySelector('.remove-fav').addEventListener('click', ()=>{
+            item.querySelector('.remove-fav').addEventListener('click', () => {
                 store.toggleFavorite(fav);
                 this.renderFavorites();
                 this.renderGrid();
@@ -148,16 +153,19 @@ export const dashboard = {
             })
             favoritesList.appendChild(item);
         })
-    },
 
-    showLoader(show) {
-        this.elements.loader.classList.toggle('hidden', !show);
+        lucide.createIcons();
     },
 
     updatePagination() {
         this.elements.prevBtn.disable = store.state.currentPage == 1;
         this.elements.nextBtn.disable = store.state.currentPage == store.state.totalPages;
-        this.elements.pageInfo.textContent = Página ${ store.state.currentPage } de ${ store.state.totalPages };
+        this.elements.pageInfo.textContent = `Página ${store.state.currentPage} de ${store.state.totalPages}`;
+    },
+
+    showLoader(show) {
+        this.elements.loader.classList.toggle('hidden', !show);
     }
+
 }
 

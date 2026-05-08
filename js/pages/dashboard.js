@@ -158,8 +158,8 @@ export const dashboard = {
     },
 
     updatePagination() {
-        this.elements.prevBtn.disable = store.state.currentPage == 1;
-        this.elements.nextBtn.disable = store.state.currentPage == store.state.totalPages;
+        this.elements.prevBtn.disable = store.state.currentPage <= 1;
+        this.elements.nextBtn.disable = store.state.currentPage >= store.state.totalPages;
         this.elements.pageInfo.textContent = `Página ${store.state.currentPage} de ${store.state.totalPages}`;
     },
 

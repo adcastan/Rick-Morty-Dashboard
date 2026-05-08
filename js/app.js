@@ -1,4 +1,4 @@
-import { dashboard } from "./pages/dashboard";
+import { dashboard } from "./pages/dashboard.js";
 
 document.addEventListener('DOMContentLoaded',()=>{
     dashboard.init();
